@@ -71,3 +71,101 @@
     此时结果尤为正了，判断的结果是seq1>seq2。因此，上述算法正确的前提是，回绕后的增量小于2^(n-1)-1。
 
     由于tcp序列号用的32位无符号数，因此可以支持的回绕幅度是2^31-1，满足要求了。
+    
+    
+  linux命令：free：free 命令显示系统使用和空闲的内存情况，包括物理内存、交互区内存(swap)和内核缓冲区内存。
+                  命令参数：
+
+                  -b 　以Byte为单位显示内存使用情况。 
+
+                  -k 　以KB为单位显示内存使用情况。 
+
+                  -m 　以MB为单位显示内存使用情况。
+
+                  -g   以GB为单位显示内存使用情况。 
+
+                  -o 　不显示缓冲区调节列。 
+
+                  -s<间隔秒数> 　持续观察内存使用状况。 
+
+                  -t 　显示内存总和列。 
+
+                  -V 　显示版本信息
+            ipcs命令：提供IPC设备的信息
+              
+               ipcs -m　　查看系统共享内存信息
+
+　　           ipcs -q　　查看系统消息队列信息
+
+　　           ipcs -s　　查看系统信号量信息
+
+　　           ipcs [-a]　系统默认输出信息，显示系统内所有的IPC信息
+      
+               ipcs -c　　查看IPC的创建者和所有者
+
+　　            ipcs -l　　查看IPC资源的限制信息
+
+　　            ipcs -p　　查看IPC资源的创建者和使用的进程ID
+
+　　            ipcs -t　　查看最新调用IPC资源的详细时间
+
+　　            ipcs -u　　查看IPC资源状态汇总信息
+                
+                ipcs -l --human 以人能看懂得方式查看系统IPC 限制信息
+                ----- Messages Limits --------
+                系统最大队列数量 = 32000
+                max size of message = 8K
+                default max size of queue = 16K
+
+                ---------- 同享内存限制 ------------
+                max number of segments = 4096
+                max seg size = 16E
+                max total shared memory = 16E
+                min seg size = 1B
+
+                --------- 信号量限制 -----------
+                最大数组数量 = 32000
+                每个数组的最大信号量数目 = 32000
+                系统最大信号量数 = 1024000000
+                每次信号量调用最大操作数 = 500
+                semaphore max value = 32767
+                
+                ipcrm 通过指定ID删除删除IPC资源，同时将与IPC对象关联的数据一并删除，只有超级用户或IPC资源创建者能够删除
+                
+                使用方法:
+
+                ipcrm -M shmkey
+
+                移除用shmkey创建的共享内存段
+
+                ipcrm -m shmid
+
+                移除用shmid标识的共享内存段
+
+                ipcrm -S semkey
+
+                移除用semkey创建的信号量
+
+                ipcrm -s semid
+
+                移除用semid标识的信号量
+
+                ipcrm -Q msgkey
+
+                移除用msgkey创建的消息队列
+
+                ipcrm -q msgid
+
+                移除用msgid标识的消息队列
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
