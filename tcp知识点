@@ -14,3 +14,12 @@
     -e 显示扩展信息，如uid;
     -s 按各个协议进行统计;
     -c 每隔一个固定时间，执行该netstat命令.
+  tcpdump
+    tcpdump i- eth1 监视指定网络接口的数据包,如果不指定网卡，默认会监视第一个网络接口，一般为eth0；
+    tcpdump host dwade 监视所有进入或者离开dwade主机的数据包，dwade也可以是IP地址；
+    tcpdump host dwade and \(james or bosh\) 监视所有dwade与james或者bosh通信的数据包；
+    tcpdump host dwade and not james 监视所有dwade的通信包，但是不包括与james通信的数据包；
+    tcpdump ip host 210.27.48.1 and not 210.27.48.2 监视所有201.27.48.1的通信IP数据包，但是不包括与201.27.48.1的通信ip数据包；
+    tcpdump -i eth0 src host dwade 监视主机dwade发出的数据包；
+    tcpdump -i eth0 dst host dwade 监视主机dwade收到的数据包。
+    
