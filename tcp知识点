@@ -166,8 +166,69 @@
    LT:水平触发，效率会低于ET触发，尤其在大并发，大流量的情况下。但是LT对代码编写要求比较低，不容易出现问题。LT模式服务编写上的表现是：只要有数据没有被获取，内核就不断通知你，因此不用担心事件丢失的情况。
 　  ET:边缘触发，效率非常高，在并发，大流量的情况下，会比LT少很多epoll的系统调用，因此效率高。但是对编程要求高，需要细致的处理每个请求，否则容易发生丢失事件的情况。
 　　从本质上讲：与LT相比，ET模型是通过减少系统调用来达到提高并行效率的。
+  
+  
+  
+  Linux系统启动流程：
+  
+  1）开机BIOS自检，加载硬盘。
+  2）读取MBR,进行MBR引导。
+  3）grub引导菜单(Boot Loader)。
+  4）加载内核kernel。
+  5）启动init进程，依据inittab文件设定运行级别
+  6）init进程，执行rc.sysinit文件。
+  7）启动内核模块，执行不同级别的脚本程序。
+  8）执行/etc/rc.d/rc.local
+  9）启动mingetty，进入系统登陆界面。
+  
+  容器中使用的排序算法sort是快速排序算法
+  约瑟夫环问题：
+  F(1)=0
+  F(i)=(F(i-1)+m)%i, 其中F(i)表示一共有i个人，第m个出队时，最后留在队列中的人的序号(从零开始数)
+  
+  Linux中的/bin目录中存放的是用户级别的二进制文件，包含常用的命令，/sbin目录下存放的是系统级别的二进制文件，只有拥有root权限才可以访问，
+  包括常用的系统命令，如ifconfig。
+  
+  linux执行定时任务：1执行脚本文件，2 crontab
+  执行脚本实例：
+  新建 clean.sh
+  #!/bin/bash
 
+# which dir would you want to clean 
+# (please use absolute path like :
+# /a/b/c )
+# split with space
+#DIR_LIST="/root/temp /var/temp"
+PATH_LIST="/home/normal/temp /home/normal/var"
 
+# time : every (x) second 
+INTERVAL=3
+
+# file filter
+FILE_FILTER="core.*"
+
+function clearfile()
+{
+    rm -rf ${FILE_FILTER}
+}
+
+while true ; do
+    sleep ${INTERVAL}
+    for WORKPATH in ${PATH_LIST} ; do
+        if [ -n ${WORKPATH} ] ; then
+            NOW_PATH=`pwd`
+            cd ${WORKPATH}
+            clearfile
+            cd ${NOW_PATH}
+        fi
+    done
+done
+
+改变clean.sh文件的权限 chmod 755 clean.sh
+
+接下来添加到系统开机启动文件 /etc/rc.local
+
+比如：/usr/local/bin/cleanwitch.sh &， &表示放到后台执行
 
     
     
