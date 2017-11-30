@@ -1,0 +1,60 @@
+strcat函数：
+
+char *strcat(char *strDest, const char *strSrc){
+  char *address=strDest;
+  assert(strDest!=NULL&&strSrc!=NULL);
+  while(*strDest!='\0'){
+    strDest++;
+  }
+  while(*strSrc!='\0'){
+    *strDest=*strSrc;
+    strSrc++;
+    strDest++;
+  }
+  *strDest='\0';
+  return address;
+}
+
+strcpy函数：
+
+char *strcpy(char *strDest, const char *strSrc){
+  char *address=strDest;
+  assert(strDest!=NULL&&strSrc!=NULL);
+  while(*strSrc){
+    *strDest++=*strSrc++;
+  }
+  *strDest='\0';
+  return address;
+}
+
+strcmp函数：
+
+bool strcmp(char *str1, char *str2){
+  assert(str1!=NULL&&str2!=NULL);
+  while(*str1&&*str2&&(*str1==*str2)){
+    str1++;
+    str2++;
+  }
+  return *str1-*str2;
+}
+
+void *memcpy(void *dest, const void *src, size_t count){
+  char *d;
+  const char *s;
+  if(src>des||dest+count<src){
+    s=src;
+    d=dest;
+    while(count>0){
+      d++=s++;
+      count--;
+    }
+  }else{
+    s=src+count-1;
+    d=dest+count-1;
+    while(count>0){
+      d--=s--;
+      count--;
+    }
+    return dest;
+  }
+}
