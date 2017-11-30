@@ -1,0 +1,42 @@
+C++类模板的全特化与偏特化
+
+类模板：
+
+template<typename T1,typename T2>
+class Test{
+  public:
+    Test(T1 a, T2 b):i(a),j(b){
+      cout<<"模板类"<<endl;
+    }
+   private:
+    T1 i;
+    T2 j;
+};
+
+全特化：
+
+template<>
+class Test{
+  public:
+    Test(int a, float b):i(a),j(b){
+      cout<<"全特化"<<endl;
+    }
+   private:
+    int i;
+    float j;
+};
+
+偏特化：
+
+template<typename T2>
+class Test{
+  public:
+    Test(int a,T2 b):i(a),j(b){
+      cout<<"偏特化"<<endl;
+    }
+   private:
+    int i;
+    T2 j;
+};
+
+函数模板全特化，没有偏特化，之所以没有偏特化是因为偏特化可以使用函数重载的方式实现。
